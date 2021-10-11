@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { useParams, useRouteMatch, useHistory } from 'react-router';
+import { Switch, useParams, useRouteMatch, useHistory } from 'react-router';
 import { Link, Route } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import { fetchMovieDetails } from '../services/fetchMovie';
@@ -58,12 +58,14 @@ export default function MovieDetailsPage({ query }) {
           />
         }
       >
-        <Route path={`${url}/cast`}>
-          <Cast idMovie={movieId} />
-        </Route>
-        <Route path={`${url}/reviews`}>
-          <Reviews idMovie={movieId} />
-        </Route>
+        <Switch>
+          <Route path={`${url}/cast`}>
+            <Cast idMovie={movieId} />
+          </Route>
+          <Route path={`${url}/reviews`}>
+            <Reviews idMovie={movieId} />
+          </Route>
+        </Switch>
       </Suspense>
     </div>
   );
